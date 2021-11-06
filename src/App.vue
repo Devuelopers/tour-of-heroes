@@ -1,10 +1,12 @@
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import Body from './components/Body.vue';
-  import Footer from './components/Footer.vue';
+  import Hero from './components/Hero.vue';
 
   export default defineComponent({
     name: "App",
+    components: {
+      Hero
+    },
     data() {
       return {
         title: "Tour of Heroes"
@@ -15,6 +17,7 @@
 
 <template>
   <h1>{{ title }}</h1>
+  <Hero />
 </template>
 
 <style lang="scss">
