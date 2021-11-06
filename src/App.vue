@@ -5,14 +5,16 @@
 
   export default defineComponent({
     name: "App",
-    components: { Body, Footer },
+    data() {
+      return {
+        title: "Tour of Heroes"
+      };
+    },
   });
 </script>
 
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <Body/>
-  <Footer />
+  <h1>{{ title }}</h1>
 </template>
 
 <style lang="scss">
