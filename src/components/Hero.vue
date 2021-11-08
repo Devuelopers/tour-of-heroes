@@ -5,8 +5,13 @@
   
   export default defineComponent({
     name: "Hero",
-    mounted() {
-      this.heroService.getHeroes().then((data: Array<Hero>) => this.heros.push(...data));
+    created() {
+      this.getAllHeroes();
+    },
+    methods: {
+      async getAllHeroes() {
+        this.heros = await this.heroService.getHeroes();
+      }
     },
     data() {
       return {
@@ -21,7 +26,7 @@
   <h2>My Heroes</h2>
   <ul class="heroes">
     <li v-for="hero in heroes" :key="hero.id">
-      <span class="badge">{{hero.id}}</span> {{hero.name}}
+      {{ hero.name }}
     </li>
   </ul>
 </template>

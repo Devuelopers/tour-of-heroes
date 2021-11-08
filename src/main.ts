@@ -7,6 +7,6 @@ app.config.globalProperties.$filters = {
     uppercase: (name: string) => {
         return name.toUpperCase();
     }
-  }
+}
 
-  app.mount('#app')
+app.mount('#app')
