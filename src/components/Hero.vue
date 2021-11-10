@@ -10,13 +10,13 @@
     },
     methods: {
       async getAllHeroes() {
-        this.heros = await this.heroService.getHeroes();
+        this.heroes = await this.heroService.getHeroes();
       }
     },
     data() {
       return {
         heroService: new HeroService(),
-        heros: Array<Hero>()
+        heroes: Array<Hero>()
       };
     },
   });
