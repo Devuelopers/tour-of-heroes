@@ -2,11 +2,15 @@
   import { defineComponent } from 'vue';
   import { Hero } from '../models/Hero';
   import HeroService  from '../service/HeroService';
+  import HeroDetail from './HeroDetail.vue';
   
   export default defineComponent({
     name: "Hero",
     created() {
       this.getAllHeroes();
+    },
+    components: {
+      HeroDetail
     },
     methods: {
       async getAllHeroes() {
@@ -15,6 +19,18 @@
       changeHero(id: number) {
         this.hero = this.heroes.find(h => h.id === id);
         this.selectedHero = true;
+      },
+      isHeroSelected(id: number) {
+
+        if (!this.selectedHero) {
+          return false;
+        }
+
+        if (this.hero === undefined || this.hero.id === null) {
+          return false;
+        }
+
+        return this.hero.id === id;
       }
     },
     data() {
@@ -30,19 +46,13 @@
 
 <template>
   <ul class="heroes">
-    <div v-if="selectedHero">
-      <h2>{{ $filters.uppercase(hero.name) }} Details</h2>
-      <div><span>id: </span>{{hero.id}}</div>
-      <div><span>name: </span>{{hero.name}}</div>
-      <div>
-        <label for="name">Hero name: </label>
-        <input id="name" v-model="hero.name" placeholder="name">
-      </div>
-    </div>
     <h2>My Heroes</h2>
-    <li v-for="row in heroes" :key="row.id" v-on:click="changeHero(row.id)">
+    <li v-for="row in heroes" :key="row.id" v-on:click="changeHero(row.id)" :class="isHeroSelected(row.id)?' selected':''">
       <span class="badge">{{row.id}}</span> {{row.name}}
     </li>
+    <div v-if="selectedHero">
+      <HeroDetail :hero="this.hero"/>
+    </div>
   </ul>
 </template>
 
